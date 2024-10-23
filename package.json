@@ -1,0 +1,35 @@
+{
+  "name": "snapshare",
+  "version": "1.0.0",
+  "description": "A fast way to share files.",
+  "main": "web.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DvidPiDev/snapshare.git"
+  },
+  "author": "DvidPi",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/DvidPiDev/snapshare/issues"
+  },
+  "homepage": "https://github.com/DvidPiDev/snapshare#readme",
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "chalk": "^5.3.0",
+    "cron": "^3.1.7",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.21.1",
+    "express-fileupload": "^1.5.1",
+    "express-session": "^1.18.1",
+    "fs": "^0.0.1-security",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "node-cron": "^3.0.3",
+    "tailwindcss": "^3.4.14"
+  }
+}

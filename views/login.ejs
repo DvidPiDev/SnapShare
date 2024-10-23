@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SnapShare - Login</title>
+    <link rel="stylesheet" href="../assets/css/build.css">
+</head>
+<body class="flex items-center justify-center h-screen bg-black text-white" style="font-family: 'Roboto Mono', monospace;">
+<div class="flex flex-col justify-center border border-solid border-white rounded-2xl p-4">
+    <p class="text-3xl font-semibold text-center mb-4">Enter access code:</p>
+    <% if (error) { %>
+        <p class="text-red-600 mb-2 text-center">Wrong code.</p>
+    <% } %>
+    <div class="flex items-center justify-center">
+        <form action="/login" method="POST">
+            <input type="password" name="password" class="bg-black focus:outline-none active:outline-none caret-white text-white border border-solid border-white rounded-2xl indent-2" required><br>
+            <button type="submit" class="text-center w-full mt-3">Go</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

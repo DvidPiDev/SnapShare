@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SnapShare - Menu</title>
+    <link rel="stylesheet" href="../assets/css/build.css">
+</head>
+<body class="flex flex-col items-center justify-center bg-black text-white h-screen" style="font-family: 'Roboto Mono', monospace;">
+<div class="flex flex-col justify-center border border-solid border-white rounded-2xl p-4">
+    <p class="text-3xl font-semibold mb-4 text-center">Upload File</p>
+    <div class="flex justify-center">
+        <form class="flex flex-col w-fit max-w-96" action="/upload" method="POST" enctype="multipart/form-data">
+            <input type="file" name="file" class="mb-2" required>
+            <label class="mb-2 w-fit">
+                Delete after
+                <select class="bg-black border border-solid border-white rounded" name="deleteAfter" required>
+                    <option value="never">Never</option>
+                    <option value="1">1 minute</option>
+                    <option value="10">10 minutes</option>
+                    <option value="60">1 hour</option>
+                    <option value="1440">1 day</option>
+                </select>
+            </label>
+
+            <label class="mb-2 w-fit">
+                <input type="checkbox" name="randomize">
+                Randomize filename
+            </label>
+
+            <button type="submit">Upload</button>
+        </form>
+    </div>
+</div>
+
+<div class="flex flex-col justify-center items-center border border-solid border-white rounded-2xl p-4 mt-4">
+    <p class="text-3xl font-semibold text-center mb-2">Uploaded Files</p>
+    <ul>
+        <% files.forEach(file => { %>
+            <li class="flex justify-between items-center mb-2">
+                <a href="/uploads/<%= file %>"><%= file %></a>
+                <form class="inline ml-3" action="/delete" method="POST" style="display: inline;">
+                    <input type="hidden" name="filename" value="<%= file %>">
+                    <button type="submit">Delete</button>
+                </form>
+            </li>
+        <% }) %>
+    </ul>
+
+    <form action="/logout" method="GET">
+        <button type="submit">Logout</button>
+    </form>
+</div>
+
+</body>
+</html>
