@@ -34,7 +34,7 @@ PORT= #Webserver port (default: 8700)
 MAX_FILE_SIZE= #Max file size in MB (default: 1GB)
 SESSION_KEY= #Read below (default is insecure)
 ```
-The `SESSION_KEY` can be literally anything, ideally a sha256 hash of something random. By the way, you don't need to put strings in quotes unless it has spaces. (Which it shouldn't) 
+The `SESSION_KEY` can be literally anything, ideally a sha256 hash of something random. By the way, you don't need to put strings in quotes unless they have spaces. (Which they shouldn't) 
 
 Traffic logging is performed in the "traffic.log" file.
 
