@@ -39,9 +39,9 @@ The `SESSION_KEY` can be literally anything, ideally a sha256 hash of something 
 Traffic logging is performed in the "traffic.log" file.
 
 ### Screenshots
-Login interface
-![1.png](githubassets/1.png "Login interface")
-Main interface
+Login interface \
+![1.png](githubassets/1.png "Login interface") \
+Main interface \
 ![2.png](githubassets/2.png "Main interface") \
 The UI is very basic as it's all that I need.
 
