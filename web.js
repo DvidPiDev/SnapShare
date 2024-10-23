@@ -17,9 +17,9 @@ const __dirname = dirname(__filename);
 const app = express();
 
 const port = process.env.PORT || 8700;
-const pass = process.env.PASSWORD;
-const fileSizeMax = process.env.MAX_FILE_SIZE;
-const sessionKey = process.env.SESSION_KEY;
+const pass = process.env.PASSWORD || "password";
+const fileSizeMax = process.env.MAX_FILE_SIZE || 1000;
+const sessionKey = process.env.SESSION_KEY || "supersecretkeythatyoushouldchangerightnow";
 
 const trafficLogLive = fs.createWriteStream(path.join(__dirname, 'traffic.log'), { flags: 'a' });
 const logFormat = '[ :date[iso] ] :remote-addr - :method ":url" :status (:response-time ms) - :user-agent';
