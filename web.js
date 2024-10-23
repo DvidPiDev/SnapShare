@@ -88,13 +88,57 @@ app.set('view engine', 'ejs');
 app.use(morgan(logFormat, { stream: trafficLogLive }));
 app.use('/assets', express.static('assets'));
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use('/uploads', express.static('uploads'));
 app.use(session({
     secret: sessionKey,
     resave: false,
     saveUninitialized: true,
     cookie: { maxAge: 60000 * 10 }
 }));
+
+app.use('/uploads', (req, res, next) => {
+    if (req.url.endsWith('.mp4')) {
+        next();
+    } else {
+        express.static('uploads')(req, res, next);
+    }
+});
+
+app.get('/uploads/:filename', (req, res) => {
+    const filePath = path.join(__dirname, 'uploads', req.params.filename);
+
+    fs.stat(filePath, (err, stats) => {
+        if (err || !fs.existsSync(filePath)) {
+            return res.status(404).send('File not found');
+        }
+
+        const fileSize = stats.size;
+        const range = req.headers.range;
+
+        if (range) {
+            const parts = range.replace(/bytes=/, "").split("-");
+            const start = parseInt(parts[0], 10);
+            const end = parts[1] ? parseInt(parts[1], 10) : fileSize - 1;
+            const chunkSize = (end - start) + 1;
+
+            res.writeHead(206, {
+                'Content-Range': `bytes ${start}-${end}/${fileSize}`,
+                'Accept-Ranges': 'bytes',
+                'Content-Length': chunkSize,
+                'Content-Type': 'video/mp4',
+            });
+
+            const stream = fs.createReadStream(filePath, { start, end });
+            stream.pipe(res);
+        } else {
+            res.writeHead(200, {
+                'Content-Length': fileSize,
+                'Content-Type': 'video/mp4',
+            });
+
+            fs.createReadStream(filePath).pipe(res);
+        }
+    });
+});
 
 app.get('/', isAuthenticated, (req, res) => {
     res.render('upload', { files: getUploadedFiles() });
